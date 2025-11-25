@@ -1,0 +1,145 @@
+:root {
+  --fg: black;
+  --bg: #ffffff;
+  --muted: #4f4f4f;
+  --accent: #822c03;;
+  --card: #ebebeb;
+  --border: #ddd;
+  --bgto: #eee;
+  --bgcomment: black; /* #0f172a; */
+  --bordercomment: #1e293b; 
+}
+
+:root.dark {
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --muted: #b0b0b0;
+  --accent: #7dd3fc;
+  --card: #141414;
+  --border: #222;
+  --bgto: #111;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bgto) 100%);
+  color: var(--fg);
+}
+
+main { min-height: 100vh; display: flex; flex-direction: column; }
+
+.hero {
+  position: relative;
+  height: 20vh;
+  min-height: 180px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) saturate(0.8) blur(0.5px);
+}
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 8px;
+  padding: 0 16px;
+}
+.hero h1 { margin: 0; font-size: clamp(24px, 3.6vw, 44px); letter-spacing: 0.3px; }
+.hero p { margin: 0; color: var(--muted); }
+
+.three-col {
+  display: grid;
+  grid-template-columns: 40% 20% 40%;
+  gap: 16px;
+  padding: 16px;
+  height: 80vh;
+}
+.col {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.col h2 { margin: 0 0 8px; font-size: 16px; color: var(--accent); font-weight: 600; letter-spacing: 0.3px; }
+
+.upload input[type="file"] { width: 100%; display: block; margin-bottom: 8px; }
+
+.player-frame {
+  position: relative;
+  background: #fff; /* was #000 */
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  flex: 1;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.player-frame video { width: 100%; height: 100%; object-fit: contain; }
+
+.upload .player-frame {
+  width: fit-content;
+  height: fit-content;
+  max-width: fit-content;
+  max-height: 100%;
+  overflow: none;
+}
+
+.upload .player-frame video {
+  max-height: 600px;
+}
+
+.placeholder { color: var(--muted); font-size: 14px; }
+
+.primary {
+  margin-top: 10px;
+  background: linear-gradient(180deg, #0ea5e9, #0284c7);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .12s ease;
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.25);
+}
+.primary[aria-disabled="true"], .primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+.primary:active { transform: translateY(1px); }
+
+.comments { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; overflow: auto; }
+.comments li { background: var(--bgcoment); border: 1px solid var(--bordercomment); border-radius: 10px; padding: 8px 10px; line-height: 1.45; font-size: 14px; }
+.muted { color: var(--muted); }
+.error { color: #fecaca; }
+
+.accordion { padding: 16px; max-width: 1100px; width: 100%; margin: 0 auto 40px; display: flex; flex-direction: column; gap: 10px; }
+.accordion details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+.accordion summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.accordion-content { margin-top: 8px; color: var(--muted); }
+
+/* ML5 toolbar */
+.pose-container { display: flex; flex-direction: column; gap: 8px; height: 100%; }
+.pose-toolbar { display: flex; align-items: center; gap: 12px; font-size: 13px; color: var(--muted); }
+.pose-toolbar .status { margin-left: auto; }
+
+@media (max-width: 1100px) {
+  .three-col { grid-template-columns: 1fr; height: auto; }
+  .col { min-height: 40vh; }
+}
